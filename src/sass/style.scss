@@ -1,0 +1,46 @@
+// Vendor sass, ie bourbon, compass, anything 3rd party
+@import "vendor/bourbon/bourbon";
+@import "vendor/font-awesome/font-awesome";
+
+// Custom utils (variables, mixins)
+@import "utils/variables";
+
+//Fonts
+@import "../static/assets/fonts/gentona/gentona.css";
+@import "../static/assets/fonts/quadon/quadon.css";
+
+// Partials (actual CSS)
+@import "partials/layout";
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: 'gentona', sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+.message {
+  font-size: 14.4rem;
+  font-family: 'quadon', serif;
+  font-weight: 100;
+  font-style: normal;
+  color: $white;
+  -webkit-font-smoothing: antialiased;
+  position: absolute;
+}
+
+.section {
+  background: rgba(0,0,0,0.1);
+  position: relative;
+  img {
+    width: 100%;
+    height: auto;
+    // -webkit-opacity: 0;
+  }
+}
