@@ -66,6 +66,46 @@ function accidentWarning(car, context) {
   }
 
 }
+
+
+function fontResize (size, scale, plate) {
+
+  // newFontSize = size * scale;
+  // plate.css({
+  //   "font-size": (newFontSize / 10) + "rem",
+  // });
+
+  // return newFontSize;
+
+}
+
+
+function checkFontSize(size, plate, context) {
+
+  // context = context || "parent";
+  // var dims = getDimensions(plate, context);
+
+  // if ( dims.width >= (dims.compare.width * 0.9) ) {
+
+  //   var newFontSize = fontResize(size, 0.9, plate);
+  //   return checkFontSize(newFontSize, plate, context);
+
+  // } else if ( dims.width < (dims.compare.width * 0.8)) {
+
+  //   return fontResize(size, 1.11111111, plate);
+
+  // } else if ( dims.width < (dims.compare.width * 0.8)) {
+
+  //   return size;
+
+  // }
+
+
+
+}
+
+
+
 function hovercar($) {
 
   $ = $ || global.jQuery;
