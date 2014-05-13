@@ -1,40 +1,29 @@
- var gulp = require("gulp")
-  , gutil = require("gulp-util")
-  , browserify = require("gulp-browserify")
-  , sass = require("gulp-ruby-sass")
-  , jshint = require("gulp-jshint")
-  , stylish = require('jshint-stylish')
-  , notify = require("gulp-notify")
-  , path = require("path")
-  , rimraf = require("gulp-rimraf")
-  , maki = require("gulp-pagemaki")
+var gulp        = require("gulp");
+var browserify  = require("gulp-browserify");
+var jshint      = require("gulp-jshint");
+var stylish     = require('jshint-stylish');
+var path        = require("path");
+var rimraf      = require("gulp-rimraf");
+var argv        = require("minimist")(process.argv.slice(2));
 
 // globs and build directories
 var paths = {
   scripts: {
-    all: "./src/**/*.js",
-    lint: ["./src/js/**/*.js", "!./src/js/vendor/**/*.js"],
-    watch: ["./src/js/**/*.js", "./src/js/app/templates/**/*.html", "!./src/js/vendor/**/*.js"],
-    build: ["./src/js/main.js"]
-  },
-  styles: {
-    all: ["./src/sass/**/*.sass", "./src/sass/**/*.scss", "./src/sass/**/*.css"],
-    build: ["./src/sass/*.sass", "./src/sass/*.scss", "./src/sass/*.css"]
-  },
-  pages: ["./src/pages/**/*"],
-  statics: ["./src/static/**/*"],
-  clean: {
-    pages: ["./public/**/*", "!./public/assets", "!./public/assets/**/*"],
-    statics: ["./public/assets/**/*", "!./public/assets/*.css", "!./public/assets/*.js"],
-    scripts: ["./public/assets/*.js"],
-    styles: ["./public/assets/*.css"]
+    all: "./**/*.js",
+    lint: ["./hovercar.js", "./lib/**/*.js"],
+    watch: ["./hovercar.js", "./lib/**/*.js"],
+    build: ["./hovercar.js"],
+    clean: [path.join(process.cwd(), "dist")]
   },
   build: {
-    root: path.join(process.cwd(), "public"),
-    assets: path.join(process.cwd(), "public", "assets")
+    root: path.join(process.cwd(), "dist")
   }
 };
 
+
+/**
+ * Utility functions
+ */
 
 function cleanUp(glob) {
   return gulp.src(glob, { read: false })
@@ -44,68 +33,26 @@ function cleanUp(glob) {
 /** ========================================================================
  *
  * TASK DEFINITIONS
- * 
+ *
  */
 
-gulp.task("default", ["scripts", "styles", "pages", "statics"]);
-
-
-
-gulp.task("pages", ["cleanPages"], function () {
-
-  var layoutDir = path.join(__dirname, "src", "layouts");
-
-  return gulp.src(paths.pages)
-    .pipe(maki({
-      templatesDir: layoutDir
-    }))
-    .pipe(gulp.dest(paths.build.root));
-
-});
-
-
-
-gulp.task("cleanPages", function () {
-
-  return cleanUp(paths.clean.pages);
-
-});
-
-
-
-gulp.task("statics", ["cleanStatic"], function () {
-
-  return gulp.src(paths.statics)
-    .pipe(gulp.dest(paths.build.root));
-
-});
-
-
-
-gulp.task("cleanStatic", function () {
-
-  return cleanUp(paths.clean.statics);
-
-});
-
+gulp.task("default", ["scripts"]);
 
 
 gulp.task("scripts", ["jshint", "cleanScripts"], function () {
-  
+
   return gulp.src(paths.scripts.build)
     .pipe(browserify({
-      debug: !gutil.env.production,
-      transform: ["node-underscorify"]
+      debug: !argv.production
     }))
-    .pipe(gulp.dest(paths.build.assets));
+    .pipe(gulp.dest(paths.build.root));
 
 });
-
 
 
 gulp.task("cleanScripts", function () {
 
-  return cleanUp(paths.clean.scripts);
+  return cleanUp(paths.scripts.clean);
 
 });
 
@@ -122,28 +69,8 @@ gulp.task("jshint", function () {
 
 
 
-gulp.task("styles", ["cleanStyles"], function () {
-
-  return gulp.src(paths.styles.build)
-    .pipe(sass())
-    .pipe(gulp.dest(paths.build.assets));
-
-});
-
-
-
-gulp.task("cleanStyles", function () {
-
-  return cleanUp(paths.clean.styles);
-
-});
-
-
 gulp.task("watch", ["default"], function () {
 
   gulp.watch(paths.scripts.watch, ["scripts"]);
-  gulp.watch(paths.styles.all, ["styles"]);
-  gulp.watch(paths.pages, ["pages"]);
-  gulp.watch(paths.statics, ["static"]);
-  
+
 });
