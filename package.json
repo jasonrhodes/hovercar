@@ -9,7 +9,7 @@
   },
   "dependencies": {},
   "name": "hovercar",
-  "description": "project =======",
+  "description": "jquery library to vertically center an object in its parent element, and more",
   "version": "0.3.0",
   "main": "hovercar.js",
   "scripts": {
