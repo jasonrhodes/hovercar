@@ -1,3 +1,71 @@
+function getDimensions($el, context) {
+
+  var dimensions = {};
+  dimensions.width = $el.outerWidth( true );
+  dimensions.height = $el.outerHeight( true );
+
+  context = context || "parent";
+
+  if ( $el.context.nodeName === "VIDEO" ) {
+    dimensions.nativeWidth = $el.context.videoWidth;
+    dimensions.nativeHeight = $el.context.videoHeight;
+  } else if ( $el.context.nodeName === "IMG" ) {
+    dimensions.nativeWidth = $el.context.naturalWidth;
+    dimensions.nativeHeight = $el.context.naturalHeight;
+  } else {
+    dimensions.nativeWidth = 0;
+    dimensions.nativeHeight = 0;
+  }
+
+  dimensions.compare = {
+    width:  (context === "window") ? $(window).width()  : $el.parent().outerWidth( true ),
+    height: (context === "window") ? $(window).height() : $el.parent().outerHeight( true )
+  };
+
+  return dimensions;
+
+}
+
+function center($el, context) {
+
+  context = context || "parent";
+  var dims = getDimensions($el, context);
+
+  $el.css({
+    "top": ((dims.compare.height - dims.height) / 2) + "px",
+    "left": ((dims.compare.width - dims.width) / 2) + "px",
+  });
+
+  if (context === "window") {
+    $el.parent().height(dims.compare.height);
+    $el.parent().width(dims.compare.width);
+  }
+}
+
+function accidentWarning(car, context) {
+
+  context = context || "parent";
+  var dims = getDimensions(car, context);
+  var carRatio = dims.nativeWidth / dims.nativeHeight;
+  var parkingSpace = dims.compare.width / dims.compare.height;
+
+  if ( carRatio >= parkingSpace ) {
+
+    car.css({
+      "width": "auto",
+      "height": dims.compare.height + "px",
+    });
+
+  } else {
+
+    car.css({
+      "width": dims.compare.width + "px",
+      "height": "auto",
+    });
+
+  }
+
+}
 function hovercar($) {
 
   $ = $ || global.jQuery;
