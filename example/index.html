@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hovercar example</title>
+  <style>
+    * { margin: 0; }
+
+    .container {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container img {
+      position: relative;
+      z-index: 100;
+    }
+
+    .container .logo {
+      position: absolute;
+      z-index: 200;
+    }
+
+    h2 {
+      font-size: 200px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <img class="bg" src="hovercraft.jpg" />
+    <img class="logo" src="logo.jpg" />
+  </div>
+
+  <h2>This is some text to push down the page. This is some text to push down the page.</h2>
+  <h2>This is some text to push down the page. This is some text to push down the page.</h2>
+  <h2>This is some text to push down the page. This is some text to push down the page.</h2>
+  <h2>This is some text to push down the page. This is some text to push down the page.</h2>
+  <h2>This is some text to push down the page. This is some text to push down the page.</h2>
+
+  <script src="jquery.js" type="text/javascript"></script>
+  <script src="example.browser.js" type="text/javascript"></script>
+
+</body>
+</html>
