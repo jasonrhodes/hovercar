@@ -1,18 +1,32 @@
 {
   "devDependencies": {
-    "path": "~0.4.9",
     "jshint-stylish": "~0.1.5",
-    "gulp-ruby-sass": "~0.3.0",
     "gulp-util": "~2.2.14",
     "gulp-notify": "~0.6.2",
     "gulp": "~3.5.2",
     "gulp-jshint": "~1.4.2",
-    "gulp-browserify": "~0.4.5",
-    "node-underscorify": "0.0.3",
-    "gulp-pagemaki": "jasonrhodes/gulp-pagemaki",
-    "gulp-rimraf": "0.0.9"
+    "gulp-browserify": "~0.4.5"
   },
-  "dependencies": {
-    "underscore": "~1.6.0"
-  }
+  "dependencies": {},
+  "name": "hovercar",
+  "description": "project =======",
+  "version": "0.3.0",
+  "main": "hovercar.js",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/VansTan/hovercar.git"
+  },
+  "keywords": [
+    "jquery",
+    "centering"
+  ],
+  "author": "Eric Conrad",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VansTan/hovercar/issues"
+  },
+  "homepage": "https://github.com/VansTan/hovercar"
 }
